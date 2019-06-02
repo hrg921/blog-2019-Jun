@@ -1,0 +1,146 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.973a61126e940203e236.css">@import url(https://fonts.googleapis.com/css?family=Amatic+SC:700);@import url(https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,900&subset=korean);body,html{margin:0}*{font-family:Noto Sans KR,sans-serif}body,html{font-size:16px}h1{font-size:2.4em;font-weight:900}h2{font-size:2em}h3{font-size:1.7em}h4{font-size:1.4em}h5{font-size:1.2em}h6{font-size:1.1em}p{font-size:1em;font-weight:300}</style><meta name="generator" content="Gatsby 2.3.3"/><title data-react-helmet="true"></title><link rel="shortcut icon" href="/icons/icon-48x48.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link as="script" rel="preload" href="/component---src-templates-til-jsx-e422758c3a33b069f53c.js"/><link as="script" rel="preload" href="/0-7050b0780f09e967e3cb.js"/><link as="script" rel="preload" href="/app-7f1584848d9be206a364.js"/><link as="script" rel="preload" href="/styles-2f96dec76db628fc4c96.js"/><link as="script" rel="preload" href="/webpack-runtime-3f8df20303840d997e41.js"/><link as="fetch" rel="preload" href="/static/d/122/path---til-css-the-stacking-context-f-0-a-965-qC6e53QWcR6xedS0Zxxn45AV9Y.json" crossorigin="use-credentials"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><header class="sc-bdVaJa irPCKr"><h1 class="sc-bwzfXH ieZTVa"><a href="/">GeonHo Tony Han,</a><a href="/undefined"> undefined</a></h1></header><div style="margin:0 auto;max-width:960px;padding:0px 1.0875rem 1.45rem;padding-top:0"><main><div><span>css</span><h1>The stacking context</h1><div><h1>Proper usage of z-index</h1>
+<p>The <strong>stacking context</strong> is a three-dimensional conceptualization of HTML elements along imaginary z-axis relative to the user, who is assumed to be facing the viewport or the webpage. HTML elements occupy this space in priority order based on element attributes.</p>
+<h2>The stacking context</h2>
+<h3>Scenario</h3>
+<ul>
+<li>Root element of the document</li>
+<li>position: absolute or relative (z-index: auto)</li>
+<li>position: fixed or sticky</li>
+<li>flexbox children (z-index: auto)</li>
+<li>grid childrent (z-index: auto)</li>
+<li>opacity &#x3C; 1</li>
+<li>mix-blend-mode: normal</li>
+<li>not none values for transform, filter, perspective, clip-path, mask, mask-image, mask-border</li>
+<li>isolation: isolate</li>
+<li>-webkit-overflow-scrolling: touch</li>
+<li>will-change: non-initial value</li>
+<li>contain: layout or paint</li>
+</ul>
+<h2>Z-index</h2>
+<p>The <code>z-index</code> values of the its child stacking contexts only have meaning in this parent.</p>
+<h2>Summary</h2>
+<ul>
+<li>Stacking contexts can be contained in other stacking contexts, and together create a hierarchy of stacking contexts.</li>
+<li>Each stacking context is completely independent of its siblings: <strong>only descendant elements are considered when stcking is processed.</strong></li>
+<li>Each stacking context is self-contained: after the element's contents are stacked, the whole element is considered in the order of parent stacking context.</li>
+</ul>
+<h2>Example</h2>
+<p><img src="https://developer.mozilla.org/@api/deki/files/913/=Understanding_zindex_04.png" alt="z index"></p>
+<p>Note that Div#1 is over Div#4, this is because Div#3's z-index is lower value than Div#1's.</p>
+<pre><code class="language-html">&#x3C;div id="div1">
+  &#x3C;h1>Division Element #1&#x3C;/h1>
+  &#x3C;code
+    >position: relative;&#x3C;br />
+    z-index: 5;&#x3C;/code
+  >
+&#x3C;/div>
+
+&#x3C;div id="div2">
+  &#x3C;h1>Division Element #2&#x3C;/h1>
+  &#x3C;code
+    >position: relative;&#x3C;br />
+    z-index: 2;&#x3C;/code
+  >
+&#x3C;/div>
+
+&#x3C;div id="div3">
+  &#x3C;div id="div4">
+    &#x3C;h1>Division Element #4&#x3C;/h1>
+    &#x3C;code
+      >position: relative;&#x3C;br />
+      z-index: 6;&#x3C;/code
+    >
+  &#x3C;/div>
+
+  &#x3C;h1>Division Element #3&#x3C;/h1>
+  &#x3C;code
+    >position: absolute;&#x3C;br />
+    z-index: 4;&#x3C;/code
+  >
+
+  &#x3C;div id="div5">
+    &#x3C;h1>Division Element #5&#x3C;/h1>
+    &#x3C;code
+      >position: relative;&#x3C;br />
+      z-index: 1;&#x3C;/code
+    >
+  &#x3C;/div>
+
+  &#x3C;div id="div6">
+    &#x3C;h1>Division Element #6&#x3C;/h1>
+    &#x3C;code
+      >position: absolute;&#x3C;br />
+      z-index: 3;&#x3C;/code
+    >
+  &#x3C;/div>
+&#x3C;/div>
+
+&#x3C;style>&#x3C;/style>
+</code></pre>
+<pre><code class="language-css">* {
+  margin: 0;
+}
+html {
+  padding: 20px;
+  font: 12px/20px Arial, sans-serif;
+}
+div {
+  opacity: 0.7;
+  position: relative;
+}
+h1 {
+  font: inherit;
+  font-weight: bold;
+}
+#div1,
+#div2 {
+  border: 1px dashed #696;
+  padding: 10px;
+  background-color: #cfc;
+}
+#div1 {
+  z-index: 5;
+  margin-bottom: 190px;
+}
+#div2 {
+  z-index: 2;
+}
+#div3 {
+  z-index: 4;
+  opacity: 1;
+  position: absolute;
+  top: 40px;
+  left: 180px;
+  width: 330px;
+  border: 1px dashed #900;
+  background-color: #fdd;
+  padding: 40px 20px 20px;
+}
+#div4,
+#div5 {
+  border: 1px dashed #996;
+  background-color: #ffc;
+}
+#div4 {
+  z-index: 6;
+  margin-bottom: 15px;
+  padding: 25px 10px 5px;
+}
+#div5 {
+  z-index: 1;
+  margin-top: 15px;
+  padding: 5px 10px;
+}
+#div6 {
+  z-index: 3;
+  position: absolute;
+  top: 20px;
+  left: 180px;
+  width: 150px;
+  height: 125px;
+  border: 1px dashed #009;
+  padding-top: 125px;
+  background-color: #ddf;
+  text-align: center;
+}
+</code></pre></div></div></main><footer>© <!-- -->2019<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.org">Gatsby</a></footer></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-templates-til-jsx","jsonName":"til-css-the-stacking-context-f0a","path":"/til/css/the stacking context/"};window.dataPath="122/path---til-css-the-stacking-context-f-0-a-965-qC6e53QWcR6xedS0Zxxn45AV9Y";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-7f1584848d9be206a364.js"],"component---src-templates-til-jsx":["/component---src-templates-til-jsx-e422758c3a33b069f53c.js"],"component---src-pages-404-js":["/component---src-pages-404-js-16acddce193c5bd8c6a3.js"],"component---src-pages-index-js":["/component---src-pages-index-js-5959c4c3bd33052bdf1e.js"],"component---src-pages-page-2-js":["/component---src-pages-page-2-js-d0d78400fdd6f057fda7.js"],"component---src-pages-til-tsx":["/component---src-pages-til-tsx-74e99d9cfe90b0e36353.js"],"pages-manifest":["/pages-manifest-2092f5d0f5f6e18953bf.js"]};/*]]>*/</script><script src="/webpack-runtime-3f8df20303840d997e41.js" async=""></script><script src="/styles-2f96dec76db628fc4c96.js" async=""></script><script src="/app-7f1584848d9be206a364.js" async=""></script><script src="/0-7050b0780f09e967e3cb.js" async=""></script><script src="/component---src-templates-til-jsx-e422758c3a33b069f53c.js" async=""></script></body></html>

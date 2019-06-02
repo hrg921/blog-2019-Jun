@@ -1,0 +1,67 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.973a61126e940203e236.css">@import url(https://fonts.googleapis.com/css?family=Amatic+SC:700);@import url(https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,900&subset=korean);body,html{margin:0}*{font-family:Noto Sans KR,sans-serif}body,html{font-size:16px}h1{font-size:2.4em;font-weight:900}h2{font-size:2em}h3{font-size:1.7em}h4{font-size:1.4em}h5{font-size:1.2em}h6{font-size:1.1em}p{font-size:1em;font-weight:300}</style><meta name="generator" content="Gatsby 2.3.3"/><title data-react-helmet="true"></title><link rel="shortcut icon" href="/icons/icon-48x48.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=07fab8ad5473f1e15e5f98b64f5d02eda19b8316"/><link as="script" rel="preload" href="/component---src-templates-til-jsx-e422758c3a33b069f53c.js"/><link as="script" rel="preload" href="/0-7050b0780f09e967e3cb.js"/><link as="script" rel="preload" href="/app-7f1584848d9be206a364.js"/><link as="script" rel="preload" href="/styles-2f96dec76db628fc4c96.js"/><link as="script" rel="preload" href="/webpack-runtime-3f8df20303840d997e41.js"/><link as="fetch" rel="preload" href="/static/d/342/path---til-typescript-language-specification-basic-types-95-d-2f5-PSkM28NQ637iVWsEXr68zfUGnE.json" crossorigin="use-credentials"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><header class="sc-bdVaJa irPCKr"><h1 class="sc-bwzfXH ieZTVa"><a href="/">GeonHo Tony Han,</a><a href="/undefined"> undefined</a></h1></header><div style="margin:0 auto;max-width:960px;padding:0px 1.0875rem 1.45rem;padding-top:0"><main><div><span>typescript &gt; language specification</span><h1>Basic Types of TypeScript</h1><div><p>Boolean, Number, String, Array는 알고 있던 type들. 하지만 Tuple은 처음 봤다.</p>
+<h2>Tuple</h2>
+<p>Tuple types allow you to express an array where the type of a fixed number of elements is known, but need not be the same. For example, you may want to represent a value as a pair of a string and a number:</p>
+<pre><code class="language-typescript">// Declare a tuple type
+let x: [string, number];
+// Initialize it
+x = ["hello", 10]; // OK
+// Initialize it incorrectly
+x = [10, "hello"]; // Error
+</code></pre>
+<p>그냥 한마디로 각 엘리먼트마다 다른 타입을 가지고 있는 Array인데 각 엘리먼트의 타입을 지정해 줄 수 있는 것 같다.</p>
+<h2>Enum</h2>
+<p>A helpful addition to the standard set of datatypes from JavaScript is the enum. As in languages like C#, an enum is a way of giving more friendly names to sets of numeric values.</p>
+<p>Enum은 본 적이 있지만 사용해본적은 없어 공부차 읽었다.</p>
+<pre><code class="language-typescript">enum Color {Red, Green, Blue}
+let c: Color = Color.Green; // 1
+</code></pre>
+<pre><code class="language-typescript">enum Color {Red = 1, Green, Blue}
+let c: Color = Color.Green; // 2
+</code></pre>
+<pre><code class="language-typescript">enum Color {Red = 1, Green = 2, Blue = 4}
+let c: Color = Color.Green; // also 2
+</code></pre>
+<p>A handy feature of enums is that you can also go from a numeric value to the name of that value in the enum. For example, if we had the value 2 but weren’t sure what that mapped to in the Color enum above, we could look up the corresponding name:</p>
+<pre><code class="language-typescript">enum Color {Red = 1, Green, Blue}
+let colorName: string = Color[2];
+
+console.log(colorName); // Displays 'Green' as its value is 2 above
+</code></pre>
+<h2>Never</h2>
+<p>The never type represents the type of values that never occur. For instance, never is the return type for a function expression or an arrow function expression that always throws an exception or one that never returns; Variables also acquire the type never when narrowed by any type guards that can never be true.</p>
+<p>never type은 절대 발생하지 않는 값을 나타낸다. 만약 함수의 리턴값이 never라면 이는 항상 error를 던져야 한다.</p>
+<pre><code class="language-typescript">// Function returning never must have unreachable end point
+function error(message: string): never {
+    throw new Error(message);
+}
+
+// Inferred return type is never
+function fail() {
+    return error("Something failed");
+}
+
+// Function returning never must have unreachable end point
+function infiniteLoop(): never {
+    while (true) {
+    }
+}
+</code></pre>
+<h2>Type assertions</h2>
+<p>그냥 타입캐스팅, 더 구체적인 타입을 지정하고 싶을 때</p>
+<pre><code class="language-Typescript">let someValue: any = "this is a string";
+
+let strLength: number = (&#x3C;string>someValue).length;
+</code></pre>
+<p>or</p>
+<pre><code class="language-Typescript">let someValue: any = "this is a string";
+
+let strLength: number = (someValue as string).length;
+</code></pre>
+<h2>Others</h2>
+<p>이 외에도 any, void, null, undefined, object가 있는데 null과 undefined에서 주의할 점만 몇가지 기억하고 가자.</p>
+<p>By default null and undefined are subtypes of all other types. That means <strong>you can assign null and undefined to something like number</strong>.</p>
+<p>However, when using the <strong>--strictNullChecks</strong> flag, null and undefined are <strong>only assignable to void and their respective types.</strong> This helps avoid many common errors. In cases where you want to pass in either a string or null or undefined, you can use the union type string | null | undefined. Once again, more on union types later on.</p>
+<p>공식문서에서는 strictNullChecks를 사용하는 것을 권장한다.</p>
+<blockquote>
+<p>As a note: we encourage the use of --strictNullChecks when possible, but for the purposes of this handbook, we will assume it is turned off.</p>
+</blockquote></div></div></main><footer>© <!-- -->2019<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.org">Gatsby</a></footer></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-templates-til-jsx","jsonName":"til-typescript-language-specification-basic-types-95d","path":"/til/typescript/language specification/basic-types/"};window.dataPath="342/path---til-typescript-language-specification-basic-types-95-d-2f5-PSkM28NQ637iVWsEXr68zfUGnE";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-7f1584848d9be206a364.js"],"component---src-templates-til-jsx":["/component---src-templates-til-jsx-e422758c3a33b069f53c.js"],"component---src-pages-404-js":["/component---src-pages-404-js-16acddce193c5bd8c6a3.js"],"component---src-pages-index-js":["/component---src-pages-index-js-5959c4c3bd33052bdf1e.js"],"component---src-pages-page-2-js":["/component---src-pages-page-2-js-d0d78400fdd6f057fda7.js"],"component---src-pages-til-tsx":["/component---src-pages-til-tsx-74e99d9cfe90b0e36353.js"],"pages-manifest":["/pages-manifest-2092f5d0f5f6e18953bf.js"]};/*]]>*/</script><script src="/webpack-runtime-3f8df20303840d997e41.js" async=""></script><script src="/styles-2f96dec76db628fc4c96.js" async=""></script><script src="/app-7f1584848d9be206a364.js" async=""></script><script src="/0-7050b0780f09e967e3cb.js" async=""></script><script src="/component---src-templates-til-jsx-e422758c3a33b069f53c.js" async=""></script></body></html>
